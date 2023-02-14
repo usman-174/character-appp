@@ -1,13 +1,30 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import UsageTable from "../components/UsageTable";
-import { FaArrowLeft } from "react-icons/fa";
+// import UsageTable from "../components/UsageTable";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import UsageStack from "../components/UsageStack";
+import ReactPaginate from "react-paginate";
+import CircleLoader from "react-spinners/CircleLoader";
 const Details = () => {
   let { tail } = useParams();
-  const [character, setcharacter] = useState(null);
+  const [character, setcharacter] = useState({});
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+
+  const [itemOffset, setItemOffset] = useState(0);
+ 
+  const SIZE = 7
+  let filteredUsage = character?.usage;
+  let endOffset = itemOffset + SIZE;
+  let pageCount = Math.ceil(filteredUsage?.length / SIZE);
+  filteredUsage = filteredUsage?.slice(itemOffset, endOffset);
+  const handlePageClick = (event) => {
+    let newOffset = (event.selected * SIZE) % character.usage.length;
+
+    setItemOffset(newOffset);
+  };
   const getCharacter = async () => {
     try {
       const { data } = await axios.get(
@@ -22,30 +39,52 @@ const Details = () => {
               return {
                 gameName: detail.gameName,
                 usage: detail.amiiboUsage[0].Usage,
+                type: "3DS",
               };
             }),
             ...data.amiibo[0].gamesSwitch.map((detail) => {
               return {
                 gameName: detail.gameName,
                 usage: detail.amiiboUsage[0].Usage,
+                type: "Switch",
               };
             }),
             ...data.amiibo[0].gamesWiiU.map((detail) => {
               return {
                 gameName: detail.gameName,
                 usage: detail.amiiboUsage[0].Usage,
+                type: "WiiU",
               };
             }),
           ],
         });
+        
+        setLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
   };
   // console.log(character.usage);
   useEffect(() => {
     getCharacter();
     // eslint-disable-next-line
   }, []);
+  if (loading)
+    return (
+      <CircleLoader
+        color={"#ad3e79"}
+        loading={loading}
+        cssOverride={{
+          textAlign: "center",
+          margin: "auto",
+          paddingTop: "50px",
+        }}
+        size={60}
+      />
+    );
   return (
     <div
       className="rounded-md mx-auto lg:w-[90%] text-center text-white mt-10 p-5 relative"
@@ -61,51 +100,71 @@ const Details = () => {
         </span>
       </label>
       {character ? (
-        <div className="grid grid-cols-1 lg:grid-cols-4">
+        <div className="grid grid-cols-1 lg:grid-cols-6">
           {/* Left */}
-          <div className="lg:w-auto sm:w-[50%] mx-auto text-center">
+          <div className=" lg:w-auto sm:w-[50%] mx-auto text-center col-span-2 ">
             <h1 className="text-xl font-bold my-1">{character.name}</h1>
 
             <h2 className="text-xs italic">{character.amiiboSeries}</h2>
-          
+
             <img
               src={character.image}
               alt="Profile Character"
-              className="mb-3 w-28 h-auto mt-2 mx-auto text-center"
+              className="mb-3 w-28 h-auto my-5 mx-auto text-center"
             />
-            <button className="bg-blue-600 p-3 rounded-2xl text-center mx-auto">
+            <button className="bg-blue-600  p-2 md:p-3 rounded-2xl text-center mx-auto">
               Product Page
             </button>
-            {/* <div className="">
-              <div className="flex justify-between px-10">
-                <h3>Name : </h3>
-                <h3>{character.name} </h3>
-              </div>
-              <div className="flex justify-between px-10">
-                <h3>Character : </h3>
-                <h3>{character.character} </h3>
-              </div>
-            </div>*/}
+
             <br />
-            <h3 className="my-2">Release Date:</h3>
+            <h3 className="my-3  text-sm md:text-lg">Release Date:</h3>
             {Object.keys(character.release).map((key) => {
-              return (
-                <div key={key} className="flex justify-between px-10">
-                  <h3>{key} : </h3>
-                  <h3>{character.release[key]} </h3>
-                </div>
-              );
+              if(character.release[key]){
+                return (
+                  <div
+                    key={key}
+                    className="flex justify-between px-10 text-xs md:text-base"
+                  >
+                    <h3>{key} : </h3>
+                    <h3>{character.release[key]} </h3>
+                  </div>
+                );
+              }
+              return null
+             
             })}
             <br />
-            <div className="flex justify-between px-10">
+            <div className="flex justify-between px-10 text-xs md:text-base">
               <h3>Identifier : </h3>
               <h3>{character.tail} </h3>
             </div>
           </div>
           {/* ==================================================== */}
           {/* Right */}
-          <div className="col-span-3 ">
-            <UsageTable usage={character.usage} />
+          <div className="col-span-4 ">
+            {/* <UsageTable usage={character.usage} />
+             */}
+            {filteredUsage.length && !loading ? (<>
+            <UsageStack usage={filteredUsage} />
+              <ReactPaginate
+                activeClassName={"item active "}
+                breakClassName={"item break-me "}
+                breakLabel={"..."}
+                containerClassName={"pagination"}
+                disabledClassName={"disabled-page"}
+                marginPagesDisplayed={3}
+                nextClassName={"item next "}
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={3}
+                pageCount={pageCount}
+                nextLabel={<FaArrowRight />}
+                pageClassName={"item pagination-page "}
+                previousClassName={"item previous"}
+                previousLabel={<FaArrowLeft />}
+              />
+            </>
+
+            ) : null}
           </div>
         </div>
       ) : null}
