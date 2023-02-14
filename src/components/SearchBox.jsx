@@ -1,12 +1,11 @@
+import { Input } from "@material-tailwind/react";
 import {
   FormControl,
   InputLabel,
   MenuItem,
-  Select,
-  TextField,
+  Select
 } from "@mui/material";
 import React from "react";
-import { Input } from "@material-tailwind/react";
 const SearchBox = ({
   size,
   setSize,
