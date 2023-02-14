@@ -126,7 +126,7 @@ const CardContainer = () => {
     );
   return (
     <div>
-      <h1 className="text-3xl m-4 py-5 ">COINII AMIBOO DATABASE</h1>
+      <h1 className="text-2xl m-4  py-3 md:py-5 ">COINII AMIBOO DATABASE</h1>
       <FilterBox
         series={series}
         selectedSeries={selectedSeries}
@@ -146,7 +146,7 @@ const CardContainer = () => {
         filterExist={filterExist}
       />
       {filteredCharacters.length ? (
-        <div className="grid grid-cols-2 gap-6 mt-10 pb-10">
+        <div className="grid grid-cols-2 gap-3 md:gap-6  mt-4 md:mt-10 pb-10">
           {filteredCharacters.map((character) => (
             <CharacterCard key={character.tail+keyId} character={character} />
           ))}
@@ -156,7 +156,7 @@ const CardContainer = () => {
           No Characters Found
         </h1>
       )}
-
+{filteredCharacters.length ?
       <ReactPaginate
         activeClassName={"item active "}
         breakClassName={"item break-me "}
@@ -172,7 +172,7 @@ const CardContainer = () => {
         pageClassName={"item pagination-page "}
         previousClassName={"item previous"}
         previousLabel={<FaArrowLeft />}
-      />
+      />:null}
     </div>
   );
 };

@@ -2,18 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-.active {
-  background-color: #852a42;
-  padding: 4px;
-}
-
 .searching .MuiFormLabel-root.Mui-focused {
   color: black !important;
 }
-.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeSmall.MuiDataGrid-menuIconButton.css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeSmall.css-ptiqhd-MuiSvgIcon-root{
-  color:white
+.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeSmall.MuiDataGrid-menuIconButton.css-1pe4mpk-MuiButtonBase-root-MuiIconButton-root
+  svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeSmall.css-ptiqhd-MuiSvgIcon-root {
+  color: white;
 }
-.MuiFormLabel-root.Mui-focused ,.MuiTablePagination-toolbar.css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar {
+.MuiFormLabel-root.Mui-focused,
+.MuiTablePagination-toolbar.css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar {
   color: #fcfcfc !important;
 }
 .MuiFormControl-root.css-1869usk-MuiFormControl-root
@@ -27,48 +24,49 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  font-size: 14px;
-  height: 40px;
+  font-size: 16px;
+  height: 35px;
   justify-content: center;
-  width: 40px;
+  width: 35px;
 }
 
 .disabled-page {
-  color: #808e9b;
+  color: #495158;
 }
 
 .active {
-  border: solid 1px #808e9b;
-  border-radius: 40px;
-  color: #808e9b;
+  border: solid 1px #ffffff;
+  border-radius: 50%;
+  color: #ffffff;
+  background-color: #852a42;
+  /* padding: 20px; */
 }
 
-
-.next {
+.next,
+.previous {
   font-size: 15px;
- 
   width: 20px;
 }
 
-.pagination {
-  align-items: center;
 
+.pagination {
+  margin: auto;
+  width: 50%;
+  align-items: center;
   display: flex;
-  flex-direction: row;
-  height: 60px;
-  justify-content: center;
+
+  height: 50px;
+  justify-content: space-around;
   align-items: center;
   list-style-type: none;
   position: relative;
 }
-
-.pagination-page {
-  font-weight: 700;
+@media only screen and (max-width: 480px) {
+  .pagination {
+   width: 80%;
+  }
+  
 }
-
-.previous {
-  font-size: 15px;
- 
-
-  width: 20px;
+.pagination-page {
+  font-weight: 600;
 }
