@@ -3,6 +3,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import React, { useId } from "react";
+// import Select from 'react-select';
+
 const FilterBox = ({
   series,
   setSelectedSeries,
@@ -12,6 +14,7 @@ const FilterBox = ({
   setSelectedFranchise,
   setItemOffset,
 }) => {
+ 
   const keyId = useId();
   const handleChangeSeries = (event) => {
     if (event.target.value === "" || selectedSeries === "") {
@@ -26,8 +29,19 @@ const FilterBox = ({
     setSelectedFranchise(event.target.value);
   };
   return (
-    <div className="bg-black w-4/5 md:w-3/5 rounded-sm  mx-auto md:my-2 flex justify-center items-center">
-      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+    <div className="w-4/5 md:w-3/5 rounded-md mx-auto md:my-2 flex justify-center items-center">
+      <FormControl
+        sx={{
+          m: 1,
+          minWidth: 120,
+          "&:focus-within fieldset, &:focus-visible fieldset": {
+            border: "none",
+          },
+          boxShadow:"0px 0px 2px  #fff"
+
+        }}
+        size="small"
+      >
         <InputLabel
           id="demo-simple-select-helper-label"
           sx={{ color: "white", fontSize: "13px" }}
@@ -54,7 +68,20 @@ const FilterBox = ({
           ))}
         </Select>
       </FormControl>
-      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+     
+      <FormControl
+        sx={{
+          m: 1,
+          minWidth: 120,
+          "&:focus-within fieldset, &:focus-visible fieldset": {
+            // border: "1px solid white!important",
+            border: 'none'
+          },
+          boxShadow:"0px 0px 2px  #fff"
+        
+        }}
+        size="small"
+      >
         <InputLabel
           id="demo-simple-select-helper-label"
           sx={{ color: "white", fontSize: "13px" }}

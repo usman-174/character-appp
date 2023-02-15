@@ -7,7 +7,7 @@ const CharacterCard = ({ character }) => {
   return (
     <div
       className="rounded-md bg-black border-white border-spacing-1 p-1 
-       w-4/5 md:w-2/3 mx-auto text-center flex flex-col justify-evenly"
+       w-11/12 md:w-3/4 mx-auto text-center flex flex-col justify-evenly"
     >
       <h1 className="text-md md:text-xl font-bold my-1">{name}</h1>
 
@@ -18,7 +18,7 @@ const CharacterCard = ({ character }) => {
         alt="Profile Character"
         className="mb-3 w-20 md:w-24 h-auto mx-auto mt-2 text-center"
       />
-      <div className="text-xs md:text-sm">
+      <div className="text-xs md:text-sm md:w-3/4 mx-auto">
         <div className="flex sm:flex-row flex-col justify-around items-center text-left">
           <h3 className="sm:font-normal font-bold ">
             Franchise <span className="sm:inline-flex hidden">:</span>{" "}

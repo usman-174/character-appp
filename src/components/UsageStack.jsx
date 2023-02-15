@@ -27,8 +27,8 @@ const UsageStack = ({ usage }) => {
               </span>
               <Typography
                 sx={{
-                  fontSize: { xs: 10, md: 15 },
-                  fontWeight: "800",
+                  fontSize: { xs: 12, md: 15 },
+                  fontWeight:"800",
                   margin: " 0 5px",
                   lineHeight: "30px",
                 }}

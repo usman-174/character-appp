@@ -5,11 +5,13 @@ const Home = () => {
   return (
     <>
       <div
-        className="rounded-md mx-auto lg:w-3/4 text-center text-white"
+        className="rounded-md mx-auto lg:w-[70%] text-center text-white pb-1"
         style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
       >
+       
         <CardContainer />
       </div>
+      <br />
     </>
   );
 };

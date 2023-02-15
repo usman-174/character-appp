@@ -2,12 +2,13 @@ import axios from "axios";
 import React, { useEffect, useId, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
+import CircleLoader from "react-spinners/CircleLoader";
+import { search } from "../utils/searchCharacter";
 import CharacterCard from "./CharacterCard";
 import FilterBox from "./FilterBox";
 import SearchBox from "./SearchBox";
-import CircleLoader  from "react-spinners/CircleLoader"
 const CardContainer = () => {
-  const keyId = useId()
+  const keyId = useId();
   const [query, setQuery] = useState("");
   const [series, setSeries] = useState([]);
   const [selectedSeries, setSelectedSeries] = useState("");
@@ -16,52 +17,30 @@ const CardContainer = () => {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [size, setSize] = useState(10);
+
   const [itemOffset, setItemOffset] = useState(0);
   const filterExist = selectedFranchise || selectedSeries || query.length > 2;
-
-  let filteredCharacters = characters;
-
-  if (selectedFranchise && selectedSeries) {
-    filteredCharacters = filteredCharacters.filter(
-      (character) =>
-        character.series.toLowerCase() === selectedFranchise.toLowerCase() &&
-        character.amiiboSeries.toLowerCase() === selectedSeries.toLowerCase()
-    );
-  } else if (selectedFranchise) {
-    filteredCharacters = filteredCharacters.filter(
-      (character) =>
-        character.series.toLowerCase() === selectedFranchise.toLowerCase()
-    );
-  } else if (selectedSeries) {
-    filteredCharacters = filteredCharacters.filter(
-      (character) =>
-        character.amiiboSeries.toLowerCase() === selectedSeries.toLowerCase()
-    );
-  }
-
-  const keys = ["name", "character"];
-  filteredCharacters =
-    query.length > 2
-      ? filteredCharacters.filter((item) => {
-          return keys.some((key) =>
-            item[key].toLowerCase().includes(query.toLowerCase())
-          );
-        })
-      : filteredCharacters;
-
   let endOffset = itemOffset + size;
 
-  let pageCount = Math.ceil(filteredCharacters.length / size);
-  filteredCharacters = filteredCharacters.slice(itemOffset, endOffset);
+  const data = search(
+    query,
+    selectedFranchise,
+    selectedSeries,
+    characters,
+    setItemOffset,
+    itemOffset
+  );
+
+  const pageCount = Math.ceil(data.length / size);
+  const filteredCharacters = data.slice(itemOffset, endOffset);
 
   const handleSize = (size) => {
     setSize(size);
-    setItemOffset(0);
-    endOffset = 0 + size;
+    setItemOffset(prev=>prev*0);
   };
 
   const handlePageClick = (event) => {
-    let newOffset = (event.selected * size) % characters.length;
+    let newOffset = (event.selected * size) % data.length;
 
     setItemOffset(newOffset);
   };
@@ -71,8 +50,8 @@ const CardContainer = () => {
     setQuery("");
     setSelectedFranchise("");
     setSelectedSeries("");
-    filteredCharacters = characters;
   };
+
   const getCharacters = async () => {
     try {
       const { data } = await axios.get("https://www.amiiboapi.com/api/amiibo/");
@@ -118,11 +97,16 @@ const CardContainer = () => {
   }, []);
   if (loading)
     return (
-      <CircleLoader 
-      color={"#ad3e79"}
+      <CircleLoader
+        color={"#ad3e79"}
         loading={loading}
-        cssOverride={{textAlign:"center" ,margin :"auto" ,paddingTop:"50px"}}
-        size={60}/>
+        cssOverride={{
+          textAlign: "center",
+          margin: "auto",
+          paddingTop: "50px",
+        }}
+        size={60}
+      />
     );
   return (
     <div>
@@ -146,9 +130,9 @@ const CardContainer = () => {
         filterExist={filterExist}
       />
       {filteredCharacters.length ? (
-        <div className="grid grid-cols-2 gap-3 md:gap-6  mt-4 md:mt-10 pb-10">
+        <div className="grid grid-cols-2 gap-3  mt-4 md:mt-10 pb-10">
           {filteredCharacters.map((character) => (
-            <CharacterCard key={character.tail+keyId} character={character} />
+            <CharacterCard key={character.tail + keyId} character={character} />
           ))}
         </div>
       ) : (
@@ -156,23 +140,38 @@ const CardContainer = () => {
           No Characters Found
         </h1>
       )}
-{filteredCharacters.length ?
-      <ReactPaginate
-        activeClassName={"item active "}
-        breakClassName={"item break-me "}
-        breakLabel={"..."}
-        containerClassName={"pagination"}
-        disabledClassName={"disabled-page"}
-        marginPagesDisplayed={3}
-        nextClassName={"item next "}
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        pageCount={pageCount}
-        nextLabel={<FaArrowRight />}
-        pageClassName={"item pagination-page "}
-        previousClassName={"item previous"}
-        previousLabel={<FaArrowLeft />}
-      />:null}
+      {filteredCharacters.length && filteredCharacters.length >= size ? (
+        <ReactPaginate
+          activeClassName={"item active "}
+          breakClassName={"item break-me "}
+          breakLabel={". . ."}
+          containerClassName={"pagination"}
+          disabledClassName={"disabled-page"}
+          marginPagesDisplayed={3}
+          nextClassName={"item next "}
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          pageCount={pageCount}
+          nextLabel={<FaArrowRight />}
+          pageClassName={"item pagination-page "}
+          previousClassName={"item previous"}
+          previousLabel={<FaArrowLeft />}
+        />
+      ) : null}
+      <div className="py-4"></div>
+      {/* <PaginationX
+        itemsPerPage={itemsPerPage}
+        totalItems={
+          search(
+            query,
+            selectedFranchise,
+            selectedSeries,
+            characters,
+            setItemOffset
+          ).length
+        }
+        paginate={paginate}
+      /> */}
     </div>
   );
 };
