@@ -36,6 +36,11 @@
 .disabled-page {
   color: #495158;
 }
+.break-me {
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+}
 
 .active {
   border: solid 1px #ffffff;
