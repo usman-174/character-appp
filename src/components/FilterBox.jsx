@@ -13,8 +13,8 @@ const FilterBox = ({
   selectedFranchise,
   setSelectedFranchise,
   setItemOffset,
+  
 }) => {
- 
   const keyId = useId();
   const handleChangeSeries = (event) => {
     if (event.target.value === "" || selectedSeries === "") {
@@ -37,8 +37,7 @@ const FilterBox = ({
           "&:focus-within fieldset, &:focus-visible fieldset": {
             border: "none",
           },
-          boxShadow:"0px 0px 2px  #fff"
-
+          boxShadow: "0px 0px 2px  #fff",
         }}
         size="small"
       >
@@ -68,17 +67,16 @@ const FilterBox = ({
           ))}
         </Select>
       </FormControl>
-     
+
       <FormControl
         sx={{
           m: 1,
           minWidth: 120,
           "&:focus-within fieldset, &:focus-visible fieldset": {
             // border: "1px solid white!important",
-            border: 'none'
+            border: "none",
           },
-          boxShadow:"0px 0px 2px  #fff"
-        
+          boxShadow: "0px 0px 2px  #fff",
         }}
         size="small"
       >
@@ -112,6 +110,8 @@ const FilterBox = ({
           ))}
         </Select>
       </FormControl>
+
+     
     </div>
   );
 };

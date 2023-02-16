@@ -21,15 +21,18 @@
 .item {
   align-items: center;
   color: #fff;
-  cursor: pointer;
+  /* cursor: pointer; */
   display: flex;
   align-items: center;
   font-size: 16px;
-  height: 35px;
+  height: 30px;
   justify-content: center;
-  width: 35px;
+  width: 30px;
+  padding: 20px;
 }
-
+.item .pageLink{
+  padding: 8px;
+}
 .disabled-page {
   color: #495158;
 }
@@ -63,7 +66,7 @@
 }
 @media only screen and (max-width: 480px) {
   .pagination {
-   width: 80%;
+   width: 90%;
   }
   
 }

@@ -14,8 +14,8 @@ const Details = () => {
   const [loading, setLoading] = useState(true);
 
   const [itemOffset, setItemOffset] = useState(0);
- 
-  const SIZE = 7
+
+  const SIZE = 7;
   let filteredUsage = character?.usage;
   let endOffset = itemOffset + SIZE;
   let pageCount = Math.ceil(filteredUsage?.length / SIZE);
@@ -58,7 +58,7 @@ const Details = () => {
             }),
           ],
         });
-        
+
         setLoading(false);
       }
     } catch (error) {
@@ -119,7 +119,7 @@ const Details = () => {
             <br />
             <h3 className="my-3  text-sm md:text-lg">Release Date:</h3>
             {Object.keys(character.release).map((key) => {
-              if(character.release[key]){
+              if (character.release[key]) {
                 return (
                   <div
                     key={key}
@@ -130,8 +130,7 @@ const Details = () => {
                   </div>
                 );
               }
-              return null
-             
+              return null;
             })}
             <br />
             <div className="flex justify-between px-10 text-xs md:text-base">
@@ -144,26 +143,29 @@ const Details = () => {
           <div className="col-span-4 ">
             {/* <UsageTable usage={character.usage} />
              */}
-            {filteredUsage.length && !loading ? (<>
-            <UsageStack usage={filteredUsage} />
-              <ReactPaginate
-                activeClassName={"item active "}
-                breakClassName={"item break-me "}
-                breakLabel={"..."}
-                containerClassName={"pagination"}
-                disabledClassName={"disabled-page"}
-                marginPagesDisplayed={3}
-                nextClassName={"item next "}
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={3}
-                pageCount={pageCount}
-                nextLabel={<FaArrowRight />}
-                pageClassName={"item pagination-page "}
-                previousClassName={"item previous"}
-                previousLabel={<FaArrowLeft />}
-              />
-            </>
-
+            {filteredUsage.length && !loading ? (
+              <div className="flex flex-col justify-between md:h-full">
+                
+      <h3 className="text-xl md:text-3xl mt-7 md:mt-0">Details</h3>
+                <UsageStack usage={filteredUsage} />
+                <ReactPaginate
+                  activeClassName={"item active "}
+                  breakClassName={"item break-me "}
+                  breakLabel={"..."}
+                  containerClassName={"pagination"}
+                  disabledClassName={"disabled-page"}
+                  marginPagesDisplayed={3}
+                  nextClassName={"item next "}
+                  onPageChange={handlePageClick}
+                  pageLinkClassName={"item pageLink"}
+                  pageRangeDisplayed={3}
+                  pageCount={pageCount}
+                  nextLabel={<FaArrowRight />}
+                  pageClassName={"item pagination-page "}
+                  previousClassName={"item previous"}
+                  previousLabel={<FaArrowLeft />}
+                />
+              </div>
             ) : null}
           </div>
         </div>

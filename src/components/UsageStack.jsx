@@ -17,7 +17,6 @@ const UsageStack = ({ usage }) => {
     <Box sx={{ width: { xs: "100%", md: "90%" }, margin: "auto" }}>
     
     
-      <h3 className="text-xl md:text-3xl mt-7 md:mt-0">Details</h3>
       <Stack spacing={3} sx={{ margin: "20px 0" }}>
         {usage.slice(0, 5).map((use) => (
           <Item sx={{ color: "black" }}>

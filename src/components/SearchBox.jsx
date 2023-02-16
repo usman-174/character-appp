@@ -1,5 +1,11 @@
 import { Input } from "@material-tailwind/react";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select
+} from "@mui/material";
 import React from "react";
 const SearchBox = ({
   size,
@@ -60,13 +66,12 @@ const SearchBox = ({
           </MenuItem>
         </Select>
       </FormControl>
+
+
       {filterExist ? (
-        <span
-          className="text-red-500 cursor-pointer"
-          onClick={() => resetFilters()}
-        >
-          Reset
-        </span>
+        <Button variant="text" size="small" sx={{padding:"0", color: "red", fontSize: "9px" }} onClick={()=>resetFilters()}>
+          Reset{" "}
+        </Button>
       ) : null}
     </div>
   );

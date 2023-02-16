@@ -91,7 +91,7 @@ const CardContainer = () => {
       setLoading(false);
     }
   };
-
+  console.log({length:filteredCharacters.length });
   useEffect(() => {
     getCharacters();
   }, []);
@@ -119,6 +119,7 @@ const CardContainer = () => {
         selectedFranchise={selectedFranchise}
         setSelectedFranchise={setSelectedFranchise}
         setItemOffset={setItemOffset}
+     
       />
 
       <SearchBox
@@ -140,7 +141,7 @@ const CardContainer = () => {
           No Characters Found
         </h1>
       )}
-      {filteredCharacters.length && filteredCharacters.length >= size ? (
+      {filteredCharacters.length && data.length > filteredCharacters.length> 0 ? (
         <ReactPaginate
           activeClassName={"item active "}
           breakClassName={"item break-me "}
