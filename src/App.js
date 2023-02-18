@@ -12,6 +12,7 @@ function App() {
         minHeight: "100vh",
         backgroundSize: "cover",
         backgroundPosition: "center",
+        paddingBottom:"10px"
       }}
     >
       <Router>

@@ -33,7 +33,7 @@ export default function Example() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link to="#" className="flex items-center">
+        <Link to="https://google.com" className="flex items-center">
           The SHop
         </Link>
       </Typography>
@@ -43,7 +43,7 @@ export default function Example() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link to="#" className="flex items-center">
+        <Link to="https://google.com"  className="flex items-center">
           News
         </Link>
       </Typography>
@@ -53,7 +53,7 @@ export default function Example() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link to="#" className="flex items-center">
+        <Link to="https://google.com"  className="flex items-center">
           Promos
         </Link>
       </Typography>
@@ -63,7 +63,7 @@ export default function Example() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link to="#" className="flex items-center">
+        <Link to="https://google.com"  className="flex items-center">
           Loyalty Program
         </Link>
       </Typography>
@@ -73,7 +73,7 @@ export default function Example() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link to="#" className="flex items-center">
+        <Link to="https://google.com"  className="flex items-center">
           Contact Us
         </Link>
       </Typography>{" "}
@@ -83,7 +83,7 @@ export default function Example() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link to="#" className="flex items-center">
+        <Link to="https://google.com"  className="flex items-center">
           Orders
         </Link>
       </Typography>{" "}
@@ -127,11 +127,11 @@ export default function Example() {
       <div className="container mx-auto flex items-center lg:flex-col justify-between text-blue-gray-900">
         <Typography
           as="a"
-          to="#"
+          to="https://google.com" 
           variant="small"
           className="mr-4 cursor-pointer py-1.5 font-normal"
         >
-          <span className="text-pink-700 text-2xl">COMIINI</span>
+          <span className="text-pink-700 text-2xl">COINMII</span>
         </Typography>
         <div className="hidden lg:block">{navList}</div>
 

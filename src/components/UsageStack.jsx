@@ -18,7 +18,7 @@ const UsageStack = ({ usage }) => {
     
     
       <Stack spacing={3} sx={{ margin: "20px 0" }}>
-        {usage.slice(0, 5).map((use) => (
+        {usage.map((use) => (
           <Item sx={{ color: "black" }}>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <span className="py-[2px] px-[3px] text-[10px] bg-red-500 text-white rounded-[50%]">

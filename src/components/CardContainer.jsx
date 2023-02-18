@@ -141,7 +141,7 @@ const CardContainer = () => {
           No Characters Found
         </h1>
       )}
-      {filteredCharacters.length && data.length > filteredCharacters.length> 0 ? (
+      {filteredCharacters.length && data.length && filteredCharacters.length> 0 ? (
         <ReactPaginate
           activeClassName={"item active "}
           breakClassName={"item break-me "}
@@ -160,19 +160,7 @@ const CardContainer = () => {
         />
       ) : null}
       <div className="py-4"></div>
-      {/* <PaginationX
-        itemsPerPage={itemsPerPage}
-        totalItems={
-          search(
-            query,
-            selectedFranchise,
-            selectedSeries,
-            characters,
-            setItemOffset
-          ).length
-        }
-        paginate={paginate}
-      /> */}
+    
     </div>
   );
 };

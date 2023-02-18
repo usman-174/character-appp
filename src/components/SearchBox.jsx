@@ -52,7 +52,7 @@ const SearchBox = ({
           value={size}
           onChange={(e) => setSize(e.target.value)}
           autoWidth
-          label="Age"
+          label="Size"
           sx={{ color: "white", fontSize: "13px" }}
         >
           <MenuItem sx={{ fontSize: "13px" }} value={10}>
