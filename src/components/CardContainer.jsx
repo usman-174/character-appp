@@ -91,7 +91,6 @@ const CardContainer = () => {
       setLoading(false);
     }
   };
-  console.log({length:filteredCharacters.length });
   useEffect(() => {
     getCharacters();
   }, []);

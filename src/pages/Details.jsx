@@ -37,7 +37,7 @@ const Details = () => {
         `https://amiiboapi.com/api/amiibo/?tail=${tail}&showusage=`
       );
       if (data) {
-        console.log(data.amiibo[0]);
+       
         setcharacter({
           ...data.amiibo[0],
           usage: [
@@ -73,7 +73,7 @@ const Details = () => {
       setLoading(false);
     }
   };
-  // console.log(character.usage);
+ 
   useEffect(() => {
     getCharacter();
     // eslint-disable-next-line
