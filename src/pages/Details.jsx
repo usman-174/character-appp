@@ -197,7 +197,7 @@ const Details = () => {
                 {size !== character.usage.length ?  <ReactPaginate
                     activeClassName={"item active "}
                     breakClassName={"item break-me "}
-                    breakLabel={". . ."}
+                    breakLabel={"..."}
                     containerClassName={"pagination"}
                     disabledClassName={"disabled-page"}
                     marginPagesDisplayed={3}
