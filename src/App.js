@@ -2,7 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import bg from "./assets/bg.jpg";
 import Details from "./pages/Details";
 import Home from "./pages/Home";
-import Navbarx from "./components/Navbarx";
+// import Navbarx from "./components/Navbarx";
+import Head from "./components/Head";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
       }}
     >
       <Router>
-      <Navbarx />
+      {/* <Navbarx /> */}
+      <Head/>
         <Routes>
 
           <Route exact path="/" element={<Home />} />
