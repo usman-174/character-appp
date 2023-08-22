@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import React, { useEffect, useId, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
@@ -7,6 +7,7 @@ import { search } from "../utils/searchCharacter";
 import CharacterCard from "./CharacterCard";
 import FilterBox from "./FilterBox";
 import SearchBox from "./SearchBox";
+import {data as amiboos} from "../data/amibos.js"
 const CardContainer = () => {
   const keyId = useId();
   const [query, setQuery] = useState("");
@@ -54,9 +55,10 @@ const CardContainer = () => {
 
   const getCharacters = async () => {
     try {
-      const { data } = await axios.get("https://www.amiiboapi.com/api/amiibo/");
+      // const { data } = await axios.get("https://www.amiiboapi.com/api/amiibo/");
+      console.log(amiboos);
       setCharacters(
-        data.amiibo.map((ami) => {
+        amiboos.amiibo.map((ami) => {
           return {
             image: ami.image,
             name: ami.name,
@@ -72,14 +74,14 @@ const CardContainer = () => {
         })
       );
       // Fetching Series
-      let fetchedSeries = data.amiibo.map((ami) => ami.amiiboSeries);
+      let fetchedSeries =amiboos.amiibo.map((ami) => ami.amiiboSeries);
 
       fetchedSeries = fetchedSeries.filter((item, index) => {
         return fetchedSeries.indexOf(item) === index;
       });
       setSeries(fetchedSeries);
       // Fetching Franchises
-      let fetchedFranchises = data.amiibo.map((ami) => ami.gameSeries);
+      let fetchedFranchises = amiboos.amiibo.map((ami) => ami.gameSeries);
 
       fetchedFranchises = fetchedFranchises.filter((item, index) => {
         return fetchedFranchises.indexOf(item) === index;
